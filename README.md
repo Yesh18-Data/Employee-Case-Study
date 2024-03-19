@@ -57,7 +57,8 @@
 
 
 
-### SQL Queries for HR Data Analysis: Employee Information and Insights 
+### SQL Queries for HR Data Analysis: Employee Information and Insights *<br>
+
 
 
 *__1. LIST OUT THE DEPARTMENT WISE MAXIMUM SALARY, MINIMUM SALARY, AVERAGE SALARY OF
