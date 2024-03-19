@@ -3,16 +3,16 @@
 
 ### Introduction 
 
-This case study focuses on HR management at EDGE IT SOLUTIONS, a hypothetical tech company. By analyzing employee data, it aims to uncover insights into recruitment, retention, performance evaluation, and satisfaction. The study seeks to enhance workforce strategies for organizational success.
+*__This case study focuses on HR management at EDGE IT SOLUTIONS, a hypothetical tech company. By analyzing employee data, it aims to uncover insights into recruitment, retention, performance evaluation, and satisfaction. The study seeks to enhance workforce strategies for organizational success. This analsys consists of 4 Tables they are 
+Location
+Job
+Department
+Employee__*
 
 
 
-
-
-
-
-1. LIST OUT THE DEPARTMENT WISE MAXIMUM SALARY, MINIMUM SALARY, AVERAGE SALARY OF
-THE EMPLOYEES.
+*__1. LIST OUT THE DEPARTMENT WISE MAXIMUM SALARY, MINIMUM SALARY, AVERAGE SALARY OF
+THE EMPLOYEES.__*
 
 
            SELECT department_id,
