@@ -57,8 +57,7 @@
 
 
 
-
-"SQL Queries for HR Data Analysis: Employee Information and Insights"
+### SQL Queries for HR Data Analysis: Employee Information and Insights 
 
 
 *__1. LIST OUT THE DEPARTMENT WISE MAXIMUM SALARY, MINIMUM SALARY, AVERAGE SALARY OF
@@ -157,7 +156,7 @@ APRIL 1985.
 		  inner join location as loc on loc.location_Id = dept.location_id
 		  where CITY = 'New york'
 		  group by loc.city
-        ```
+```
 
   10. DISPLAY THE EMPLOYEE DETAILS WITH SALARY GRADES. 
 
@@ -323,5 +322,6 @@ APRIL 1985.
           -- IN N Place we have keep any number to get the Nth highest salary
 ```
 
-
+### For any Queries/Clarification  👇📊
+[Linkedln](https://www.linkedin.com/in/yeswanthpullagura/)
 							
