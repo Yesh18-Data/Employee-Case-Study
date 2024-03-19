@@ -57,7 +57,7 @@
 
 
 
-### SQL Queries for HR Data Analysis: Employee Information and Insights *<br>
+### SQL Queries for HR Data Analysis: Employee Information and Insights 
 
 
 
