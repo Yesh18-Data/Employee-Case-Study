@@ -11,6 +11,54 @@
 * *__Department__*
 * *__Employee__*
 
+#### Employee Case Study Questions
+
+* *__1. List out the department-wise maximum salary, minimum salary, average salary of the employees.__*<br>
+
+* *__2.List out job-wise maximum salary, minimum salary, average salaries of the employees.__*<br>
+
+* *__3. List out the number of employees joined in every month in ascending order.__*<br>
+
+* *__4. List out the number of employees for each month and year, in the ascending order based on the year, month.__*<br>
+
+* *__5. How many employees joined in January or September month.__*<br>
+
+* *__6. Which is the department ID, having greater than or equal to 3 employees joined in April 1985.__*<br>
+
+* *__7. How many employees who are working in the sales department.__*<br>
+
+* *__8. Which is the department having greater than or equal to 5 employees and display the department names in ascending order.__*<br>
+
+* *__9.How many employees are working in "New York".__*<br>
+
+* *__10. Display the employee details with salary grades.__*<br>
+
+* *__11. List out the no. of employees on grade-wise.__*<br>
+
+* *__12. Display the employee salary grades and the number of employees between 2000 to 5000 ranges of salary.__*<br>
+
+* *__13. Display all employees in sales or operation departments.__*<br>
+
+* *__14. List out the distinct jobs in sales and accounting departments.__*<br>
+
+* *__15. List out the common jobs in research and accounting departments in ascending order.__*<br>
+
+* *__16. Display the employees who are working in the sales department.__*<br>
+
+* *__17. Display the employees who are working as 'Clerk'.__*<br>
+
+* *__18. Display the list of employees who are living in "New York".__*<br>
+
+* *__19. Display the Nth highest salary drawing employee details.__*<br>
+
+
+
+
+
+
+
+
+"SQL Queries for HR Data Analysis: Employee Information and Insights"
 
 
 *__1. LIST OUT THE DEPARTMENT WISE MAXIMUM SALARY, MINIMUM SALARY, AVERAGE SALARY OF
