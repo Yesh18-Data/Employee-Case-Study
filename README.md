@@ -3,11 +3,13 @@
 
 ### Introduction 
 
-*__This case study focuses on HR management at EDGE IT SOLUTIONS, a hypothetical tech company. By analyzing employee data, it aims to uncover insights into recruitment, retention, performance evaluation, and satisfaction. The study seeks to enhance workforce strategies for organizational success. This analsys consists of 4 Tables they are 
-Location
-Job
-Department
-Employee__*
+*__This case study focuses on HR management at EDGE IT SOLUTIONS, a hypothetical tech company. By analyzing employee data, it aims to uncover insights into recruitment, retention, performance evaluation, and satisfaction. The study seeks to enhance workforce strategies for organizational success. This analsys consists of 4 Tables they are__*
+
+
+* *__Location__*
+* *__Job__*
+* *__Department__*
+* *__Employee__*
 
 
 
