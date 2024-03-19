@@ -96,16 +96,16 @@ EMPLOYEES.
 			   group by employee_id
 				having count(*) >0
 ```
-4. LIST OUT THE NUMBER OF EMPLOYEES FOR EACH MONTH AND YEAR, IN THE ASCENDING ORDER BASED ON THE YEAR, MONTH. 
+4. LIST OUT THE NUMBER OF EMPLOYEES FOR EACH MONTH AND YEAR, IN THE ASCENDING ORDER BASED ON THE YEAR, MONTH.
+   
 ```
    SELECT LEFT(DATENAME(MONTH, hire_date), 3)+ '-'+right(datename(year, hire_date),  4)
    AS join_month_Year,
        COUNT(*) AS num_employees
-FROM employee
-GROUP BY  LEFT(DATENAME(MONTH, hire_date), 3)+ '-'+right(datename(year, hire_date),  4) 
-
-HAVING COUNT(*) > 0
-ORDER BY join_month_Year asc
+       FROM employee
+       GROUP BY  LEFT(DATENAME(MONTH, hire_date), 3)+ '-'+right(datename(year, hire_date),  4) 
+       HAVING COUNT(*) > 0
+       ORDER BY join_month_Year asc
 ```
 
 
@@ -138,7 +138,7 @@ APRIL 1985.
 ```
 
  8. WHICH IS THE DEPARTMENT HAVING GREATER THAN OR EQUAL TO 5 EMPLOYEES AND DISPLAY
-THE DEPARTMENT NAMES IN ASCENDING ORDER. 
+    THE DEPARTMENT NAMES IN ASCENDING ORDER. 
 ```
            select name as department_name , COUNT(emp.employee_id) as num_of_employees
 		   from Employee as emp
@@ -148,20 +148,20 @@ THE DEPARTMENT NAMES IN ASCENDING ORDER.
 		   order by dept.Name asc
 	```	   
 
-  9. HOW MANY EMPLOYEES ARE WORKING IN "NEW YORK".
+ 9. HOW MANY EMPLOYEES ARE WORKING IN "NEW YORK".
   
-	```	  select COUNT(emp.employee_id)as num_of_employees,loc.city
+```
+             Select COUNT(emp.employee_id)as num_of_employees,loc.city
 		  from Employee as emp
 		  inner join  department as dept on  dept.Department_ID = emp.Department_Id
 		  inner join location as loc on loc.location_Id = dept.location_id
 		  where CITY = 'New york'
 		  group by loc.city
-```
-                
+        ```
 
   10. DISPLAY THE EMPLOYEE DETAILS WITH SALARY GRADES. 
 
-```
+ ```
            SELECT EMP.Employee_ID,CONCAT(first_name,middle_name,last_name) AS Employee_name,
 		   EMP.SALARY,   try_cast(JB.Designation as int)
 		   FROM Employee AS EMP
@@ -216,10 +216,11 @@ THE DEPARTMENT NAMES IN ASCENDING ORDER.
 					 group by SALARY_GRADE
 					 order by SALARY_GRADE  desc
 
-	```	  
+```	  
 			 
  12.DISPLAY THE EMPLOYEE SALARY GRADES AND NO. OF EMPLOYEES BETWEEN 2000 TO 5000
     RANGE OF SALARY.
+
 ```						     
     ;with SalaryGradetemp2                 
 
@@ -252,24 +253,25 @@ THE DEPARTMENT NAMES IN ASCENDING ORDER.
 ```
 
 14. LIST OUT THE DISTINCT JOBS IN SALES AND ACCOUNTING DEPARTMENTS.
-      ```    
+ ```    
                   SELECT  DISTINCT DESIGNATION AS JOB
                   FROM Employee AS EMP
                   INNER JOIN JOB AS JB ON JB.Job_ID = EMP.Job_Id
                   INNER JOIN Department AS DEPT ON DEPT.Department_ID =EMP.Department_Id
                    --WHERE DEPT.NAME  = 'SALES' AND DEPT.Name = 'ACCOUNTING'
                   WHERE DEPT.Name IN ('SALES','ACCOUNTING','OPERATIONS','RESEARCH')
-       ```
+  ```
 
  15. LIST OUT THE COMMON JOBS IN RESEARCH AND ACCOUNTING DEPARTMENTS IN ASCENDING ORDER.
-  ```
+
+```
                           SELECT DESIGNATION AS JOB
                           FROM Employee AS EMP
 			              INNER JOIN JOB AS JB ON JB.Job_ID = EMP.Job_Id
 			              INNER JOIN Department AS DEPT ON DEPT.Department_ID = EMP.Department_Id
 			              WHERE Name IN ('RESEARCH','ACCOUNTING')
 			          	  ORDER BY Designation			          
-	```		        
+```		        
 
 16. DISPLAY THE EMPLOYEES WHO ARE WORKING IN SALES DEPARTMENT.
 ```
@@ -308,7 +310,8 @@ THE DEPARTMENT NAMES IN ASCENDING ORDER.
 		FROM Employee AS EMP
         WHERE Department_Id = (SELECT DEPT.DEPARTMENT_ID  FROM Department  AS DEPT
 		                           WHERE DEPT.Location_ID = (SELECT LOC.Location_ID FROM location AS LOC
-								                                WHERE CITY = 'NEW YORK') ```
+								                                WHERE CITY = 'NEW YORK')
+```
 							   
 19. DISPLAY THE N'TH HIGHEST SALARY DRAWING EMPLOYEE DETAILS.
 ```
