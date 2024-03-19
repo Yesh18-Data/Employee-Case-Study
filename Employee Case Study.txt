@@ -1,0 +1,914 @@
+   /*   TABLE NAME  :    LOCATION
+
+Location_ID(PK)           City
+
+      122                New York
+      123                Dallas
+      124                Chicago
+      167                Boston 
+   
+   */    	               
+   create table location
+    
+   (
+   location_Id int primary key,
+   CITY VARCHAR (25)
+   )
+
+
+   INSERT INTO LOCATION ( LOCATION_ID,CITY)
+   SELECT 122,'New York' union all
+   select 123,'Dallas'   union all
+   select 124,'Chicago'  union all
+   select 167,'Boston'
+
+    SELECT * FROM LOCATION
+/*
+	 Table Name : DEPARTMENT
+
+Department_Id(PK) Name Location_Id(FK)
+       10         Accounting 122
+       20         Sales 124
+       30         Research 123
+       40         Operations 167 
+       					  
+*/
+
+
+   create table Department
+   (
+   Department_ID int primary key,
+   Name varchar (25),
+   Location_ID int Foreign key  references LOcation (location_id)
+   )
+
+ 
+
+
+
+   Insert Into Department (Department_ID,Name,Location_ID)
+   select 10,'Accounting',122 union all
+   select 20,'Sales',124 union all
+   select 30,'Research',123 union all
+   select 40,'Operations',167
+
+
+
+   select * from department
+
+
+/*
+  Table Name : JOB
+
+Job_Id  Designation
+ 667       Clerk
+ 668       Staff
+ 669       Analyst
+ 670       SalesPerson
+ 671       Manager
+ 672       President 
+
+*/
+
+
+create table JOB
+(
+
+    Job_ID int primary key,
+	Designation varchar (25)
+
+)
+
+
+
+
+Insert into Job (Job_ID,Designation)
+
+SELECT 667,'Clerk' union all
+select 668,'Staff' union all
+select 669,'Analyst' union all
+select 670,'SalesPerson' union all
+select 671,'Manager' union all
+select 672,'President' 
+
+select * from JOB
+ 
+create table Employee
+(
+
+Employee_Id int,
+Last_Name varchar (25),
+First_Name varchar (25),
+Middle_Name varchar (25),
+Job_Id int foreign  key references Job(Job_Id), 
+Hire_Date date,
+Salary int,
+Commission int,
+Department_Id int foreign key references Department (Department_Id)
+
+)
+
+
+Insert into Employee
+ ( Employee_Id,Last_Name,First_Name,Middle_Name,Job_Id,
+   Hire_Date,Salary,Commission,Department_Id
+
+  )
+
+ select 7369 , 'SMITH', 'JOHN','Q', 667, ' 17-DEC-84', 800, NULL, 20 union all
+ select 7499, 'ALLEN','KEVIN','J', 670, '20-FEB-85', 1600, 300, 30 union all
+ select 7505 ,'DOYLE', 'JEAN', 'K' , 671 , '04-APR-85', 2850 ,NULL , 30 union all
+ select 7506 ,'DENNIS', 'LYNN', 'S' ,671, '15-MAY-85' ,2750, NULL , 30 union all
+ select 7507 ,'BAKER', 'LESLIE' ,'D',671,'10-JUN-85', 2200 ,NULL, 40 union all
+ select 7521, 'WARK', 'CYNTHIA', 'D',670,'22-FEB-85', 1250, 500, 30 
+
+ --  SIMPLE QUERIES
+
+  --1)list of all Employee Details
+
+ select * from Employee
+
+-- OUTPUT 
+
+1	7369	SMITH	JOHN	Q	667	1984-12-17	800	    NULL	20
+2	7499	ALLEN	KEVIN	J	670	1985-02-20	1600	300	    30
+3	7505	DOYLE	JEAN	K	671	1985-04-04	2850	NULL	30
+4	7506	DENNIS	LYNN	S	671	1985-05-15	2750	NULL	30
+5	7507	BAKER	LESLIE	D	671	1985-06-10	2200	NULL	40
+6	7521	WARK	CYNTHIA	D	670	1985-02-22	1250	500	    30
+
+
+ 
+--2).list od all department details
+
+select * from Department
+ 
+ --OUTPUT
+
+1	10	Accounting	122
+2	20	Sales	    124
+3	30	Research	123
+4	40	Operations	167
+
+
+
+
+--3).list of all JOB Details
+
+select * from JOB
+
+--OUTPUT
+
+1	667	Clerk
+2	668	Staff
+3	669	Analyst
+4	670	SalesPerson
+5	671	Manager
+6	672	President
+
+--4).list of all the locations
+
+select * from location
+
+--OUTPUT
+
+1	122	New York
+2	123	Dallas
+3	124	Chicago
+4	167	Boston
+
+-- 5).list out firstname,lastname,salary,commission for all the employees
+
+select  first_name,LAST_name,salary,commission from Employee
+
+--OUTPUT
+
+1	JOHN	SMITH	800	    NULL
+2	KEVIN	ALLEN	1600	300
+3	JEAN	DOYLE	2850	NULL
+4	LYNN	DENNIS	2750	NULL
+5	LESLIE	BAKER	2200	NULL
+6	CYNTHIA	WARK	1250	500
+
+
+/*  6. LIST OUT EMPLOYEEID,LASTNAME,DEPARTMENTID FOR ALL EMPLOYEES AND
+ ALIAS EMPLOYEEID AS "ID OF THE EMPLOYEE",LAST NAME AS "NAME OF THE EMPLOYEE",
+DEPARTMENTID AS "DEP_ID". 
+*/
+
+
+select employee_id as 'ID OF THE Employee',last_name as 'Name of the Employee'
+,department_id as 'Dep_ID' FROM Employee
+
+
+
+--7). LIST OUT THE EMPLOYEES ANNUAL SALARY WITH THEIR NAMES ONLY. 
+
+SELECT FIRST_NAME,LAST_NAME,SALARY FROM Employee
+
+--OUTPUT
+
+1	JOHN	SMITH	800
+2	KEVIN	ALLEN	1600
+3	JEAN	DOYLE	2850
+4	LYNN	DENNIS	2750
+5	LESLIE	BAKER	2200
+6	CYNTHIA	WARK	1250
+
+
+-- WHERE CONDITION:
+
+--1. LIST THE DETAILS ABOUT "SMITH"
+
+SELECT * FROM Employee WHERE Last_Name = 'SMITH'
+
+--OUTPUT
+
+1	7369	SMITH	JOHN	Q	667	1984-12-17	800	NULL	20
+
+--2. LIST OUT THE EMPLOYEES WHO ARE WORKING IN DEPARTMENT 20.
+
+SELECT * FROM EMPLOYEE WHERE Department_Id = 20
+
+--OUTPUT
+
+1	7369	SMITH	JOHN	Q	667	1984-12-17	800	NULL	20
+
+
+--3. LIST OUT THE EMPLOYEES WHO ARE EARNING SALARY BETWEEN 3000 AND 4500.
+
+SELECT * FROM EMPLOYEE 
+WHERE Salary BETWEEN 3000 AND 4500 
+
+--THERE IS NO OUTPUT BECAUSE NO SALARY BETWEEN 3000 AND 4500 
+
+
+--4. LIST OUT THE EMPLOYEES WHO ARE WORKING IN DEPARTMENT 10 OR 20.
+
+SELECT * FROM  Employee 
+WHERE Department_Id = 10 OR  Department_id =20 
+
+--OUTPUT
+
+1	7369	SMITH	JOHN	Q	667	1984-12-17	800	NULL	20
+
+--5. FIND OUT THE EMPLOYEES WHO ARE NOT WORKING IN DEPARTMENT 10 OR 30.
+
+SELECT * FROM Employee
+WHERE Department_Id NOT IN (10,30)
+
+--OUTPUT
+
+1	7369	SMITH	JOHN	Q	667	1984-12-17	800	    NULL	20
+2	7507	BAKER	LESLIE	D	671	1985-06-10	2200	NULL	40
+
+
+--6. LIST OUT THE EMPLOYEES WHOSE NAME STARTS WITH 'S'.
+
+  SELECT * FROM Employee
+  WHERE First_Name+Middle_Name+Last_Name LIKE 'S%'
+  
+  --NO OUTPUT
+
+
+--7. LIST OUT THE EMPLOYEES WHOSE NAME STARTS WITH 'S' AND ENDS WITH 'H'.
+
+SELECT * FROM Employee
+WHERE First_Name+Middle_Name+LAST_name LIKE 'S%' 
+AND First_Name+Middle_Name+LAST_name LIKE  '%H'
+
+
+
+
+--8. LIST OUT THE EMPLOYEES WHOSE NAME LENGTH IS 4 AND START WITH 'S'.
+
+SELECT * FROM Employee
+WHERE LEN(First_Name) = 4 AND LEFT(First_Name,1) = 'S'
+
+SELECT * FROM Employee
+WHERE LEN(Last_Name) = 4 AND Last_Name LIKE 'S%'
+
+
+
+--9. LIST OUT EMPLOYEES WHO ARE WORKING IN DEPARTMENT 10 AND DRAW THE SALARIES MORE THAN 3500.
+
+SELECT * FROM Employee
+WHERE Department_Id =10 AND Salary >3500
+
+
+
+--10. LIST OUT THE EMPLOYEES WHO ARE NOT RECEVING COMMISSION.
+
+SELECT * FROM  Employee
+WHERE Commission IS NULL
+
+  --OUTPUT
+
+1	7369	SMITH	JOHN	Q	667	1984-12-17	800	    NULL	20
+2	7505	DOYLE	JEAN	K	671	1985-04-04	2850	NULL	30
+3	7506	DENNIS	LYNN	S	671	1985-05-15	2750	NULL	30
+4	7507	BAKER	LESLIE	D	671	1985-06-10	2200	NULL	40
+
+
+O-- RDER BY CLAUSE:
+
+
+--1. LIST OUT THE EMPLOYEE ID, LAST NAME IN ASCENDING ORDER BASED ON THE EMPLOYEE ID.
+
+  SELECT EMPLOYEE_ID, LAST_NAME FROM EMPLOYEE
+  ORDER BY Employee_Id
+
+  --OUTPUT
+    
+1	7369	SMITH
+2	7499	ALLEN
+3	7505	DOYLE
+4	7506	DENNIS
+5	7507	BAKER
+6	7521	WARK
+
+
+
+--2. LIST OUT THE EMPLOYEE ID, NAME IN DESCENDING ORDER BASED ON SALARY.
+      
+	   SELECT EMPLOYEE_ID,(FIRST_NAME+' '+ MIDDLE_NAME+' '+ LAST_NAME) AS EMPLOYEE_NAME
+	   FROM Employee
+	   ORDER BY Salary DESC
+
+	   --OUTPUT
+	                    1	7505	JEAN K DOYLE
+                        2	7506	LYNN S DENNIS
+                        3	7507	LESLIE D BAKER
+                        4	7499	KEVIN J ALLEN
+                        5	7521	CYNTHIA D WARK
+                        6	7369	JOHN Q SMITH
+
+
+
+
+
+/*3. LIST OUT THE EMPLOYEE DETAILS ACCORDING TO THEIR LAST-NAME IN ASCENDING ORDER AND
+SALARIES IN DESCENDING ORDER.
+*/
+
+
+     select * from Employee
+	 order by Last_Name asc,Salary desc
+
+  
+  
+
+4. LIST OUT THE EMPLOYEE DETAILS ACCORDING TO THEIR LAST-NAME IN ASCENDING ORDER AND
+THEN ON DEPARTMENT_ID IN DESCENDING ORDER.
+
+
+                select * from Employee
+				order by Last_Name asc,Department_Id desc
+
+
+
+
+
+
+---GROUP BY & HAVING CLAUSE :
+
+
+
+1. HOW MANY EMPLOYEES WHO ARE IN DIFFERENT DEPARTMENTS WISE IN THE ORGANIZATION.
+
+
+             select  department_id ,count (*) as NUM_of_Employee
+			 from employee
+			 group by department_id
+
+			 --OUTPUT
+
+			             1	20	1
+                         2	30	4
+						 3	40	1
+
+
+
+2. LIST OUT THE DEPARTMENT WISE MAXIMUM SALARY, MINIMUM SALARY, AVERAGE SALARY OF
+THE EMPLOYEES.
+
+
+           SELECT department_id,
+		     max (salary) as Max_salary,
+			 min(salary) as Min_salary,
+			 avg(salary) as Avg_salary
+			 from employee
+
+			 group by department_id
+			 having count(*) > 0
+
+			 --OUTPUT	
+
+			  	 20 	800	   800	  800
+              	 30	    2850   1250   2112
+              	 40	    2200   2200	  2200
+
+
+ /* 3. LIST OUT JOB WISE MAXIMUM SALARY, MINIMUM SALARY, AVERAGE SALARIES OF THE
+EMPLOYEES. */
+
+
+select * from employee
+
+                 select job_id,
+				 max(salary) as Max_salary,
+				 min(salary) as Min_salary,
+				 avg(salary) as Avg_salary
+
+				 from employee
+				 
+				 group by job_id
+				 having count(*) >0
+
+				 --OUTPUT
+				
+				1	667	800	    800	    800
+                2	670	1600	1250	1425
+                3	671	2850	2200	2600
+
+
+--4. LIST OUT THE NUMBER OF EMPLOYEES JOINED IN EVERY MONTH IN ASCENDING ORDER.
+
+                SELECT EMPLOYEE_ID, COUNT (*) AS NUM_Employee
+				from employee
+			   group by employee_id
+				having count(*) >0
+
+
+/*5. LIST OUT THE NUMBER OF EMPLOYEES FOR EACH MONTH AND YEAR, 
+IN THE ASCENDING ORDER BASED ON THE YEAR, MONTH. */
+
+
+SELECT LEFT(DATENAME(MONTH, hire_date), 3)+ '-'+right(datename(year, hire_date),  4)
+AS join_month_Year,
+       COUNT(*) AS num_employees
+FROM employee
+GROUP BY  LEFT(DATENAME(MONTH, hire_date), 3)+ '-'+right(datename(year, hire_date),  4) 
+
+HAVING COUNT(*) > 0
+ORDER BY join_month_Year asc
+
+
+--6. LIST OUT THE DEPARTMENT ID HAVING ATLEAST FOUR EMPLOYEES.
+
+
+        select department_id
+		from Employee
+		group by department_id
+		having  count(employee_id )>=4
+
+
+
+---7. HOW MANY EMPLOYEES JOINED IN JANUARY MONTH.
+
+       
+	
+	        SELECT COUNT(Employee_Id) AS No_of_employees
+	        FROM Employee
+	        WHERE datename(MONTH,Hire_Date) = 'JAN'
+
+
+--8. HOW MANY EMPLOYEES JOINED IN JANUARY OR SEPTEMBER MONTH.
+
+
+              SELECT COUNT(EMPLOYEE_ID) AS NP_of_Employee_JOINED_IN_01_09
+              from employee AS EMP
+              where (DATEpart(month,hire_date)) = 1 or (DATEpart(month,hire_date))  = 9 
+ 
+
+
+
+--9. HOW MANY EMPLOYEES WERE JOINED IN 1985.
+                   
+	
+
+					  SELECT COUNT(emp.employee_id) AS NUM_OF_EMPLOYEE_JOINED_IN_1985
+					  from Employee as Emp
+					  where (DATENAME(year,hire_date)) = 1985
+
+
+
+					  
+--10. HOW MANY EMPLOYEES WERE JOINED EACH MONTH IN 1985.
+
+
+             select  count(employee_id) as Num_of_employee,datename(MONTH,hire_date) as Joining_month
+			 from Employee
+			 where datepart(year,hire_date) = 1985
+			 group by datename(MONTH,hire_date)
+  
+
+
+
+ -- 11. HOW MANY EMPLOYEES WERE JOINED IN MARCH IN 1985
+
+
+          SELECT COUNT(EMPLOYEE_ID) AS Num_of_employee 
+		  FROM Employee AS EMP
+		  WHERE DATENAME(MONTH,HIRE_DATE) = 'MARCH' AND  DATEPART(YEAR,HIRE_DATE) = 1985
+
+		 
+/*  12. WHICH IS THE DEPARTMENT ID, HAVING GREATER THAN OR EQUAL TO 3 EMPLOYEES JOINED IN
+APRIL 1985.  */
+
+                    SELECT  COUNT(EMP.EMPLOYEE_ID) AS NUMBER_OF_EMPLOYEES ,Department_ID
+					FROM Employee AS EMP
+					WHERE DATENAME(MONTH,HIRE_DATE) = 'APRIL' AND DATEPART(YEAR,HIRE_DATE) = 1985
+					GROUP BY Department_Id
+					HAVING COUNT(EMP.EMPLOYEE_ID) >= 3
+					
+
+
+-- JOINS :
+
+
+--1. LIST OUT EMPLOYEES WITH THEIR DEPARTMENT NAMES.
+
+
+
+          SELECT (EMP.FIRST_NAME+ ' '+MIDDLE_NAME+ ' '+LAST_NAME) AS EMPLOYEE_NAME
+		  ,EMP.EMPLOYEE_ID,DEPT.NAME AS DEPARTMENT_NAME
+		  FROM EMPLOYEE AS EMP
+          LEFT JOIN DEPARTMENT AS DEPT ON EMP.DEPARTMENT_ID =DEPT.DEPARTMENT_ID
+		
+
+
+
+2--. DISPLAY EMPLOYEES WITH THEIR DESIGNATIONS.
+
+          SELECT * FROM JOB
+
+		  SELECT (EMP.FIRST_NAME+ ' '+MIDDLE_NAME+ ' '+LAST_NAME) AS EMPLOYEE_NAME,
+		  EMP.EMPLOYEE_ID,JB.DESIGNATION AS DESIGNATIONS
+		  FROM EMPLOYEE AS EMP
+		  LEFT JOIN JOB AS JB ON EMP.JOB_ID =JB.JOB_ID
+
+
+
+--3. DISPLAY THE EMPLOYEES WITH THEIR DEPARTMENT NAMES AND REGIONAL GROUPS.
+
+          
+		  SELECT (EMP.FIRST_NAME+ ' '+MIDDLE_NAME+ ' '+LAST_NAME) AS EMPLOYEE_NAME
+		  ,EMP.EMPLOYEE_ID,DEPT.NAME AS DEPARTMENT_NAME
+		  ,LOC.CITY AS CITY_NAME
+		  FROM EMPLOYEE AS EMP
+		  INNER JOIN DEPARTMENT AS DEPT ON DEPT.DEPARTMENT_ID =EMP.DEPARTMENT_ID
+		  INNER JOIN LOCATION AS LOC ON LOC.LOCATION_ID =DEPT.LOCATION_ID
+
+
+		 
+
+/*4. HOW MANY EMPLOYEES WHO ARE WORKING IN DIFFERENT DEPARTMENTS AND DISPLAY WITH
+DEPARTMENT NAMES. */
+                    
+          
+
+              SELECT NAME AS DEPARTMENT_NAME,COUNT(emp.Employee_Id) as num_of_employees
+			  from Employee as emp
+			  inner join Department as dept on dept.Department_ID = emp.Department_Id
+			  group by (dept.Name)
+			
+			
+
+/* 5. HOW MANY EMPLOYEES WHO ARE WORKING IN SALES DEPARTMENT. */
+
+
+             select name as DEPARTMENT_NAME , COUNT(EMP.EMPLOYEE_ID) AS NUM_OF_EMPLOYEE
+			 FROM Employee AS EMP
+			 INNER join DEPARTMENT AS DEPT ON DEPT.DEPARTMENT_id = emp.Department_id
+             where (dept.NAME) = 'sales'
+			 group by (dept.Name)
+
+
+
+/* 6. WHICH IS THE DEPARTMENT HAVING GREATER THAN OR EQUAL TO 5 EMPLOYEES AND DISPLAY
+THE DEPARTMENT NAMES IN ASCENDING ORDER. */
+
+
+           select name as department_name , COUNT(emp.employee_id) as num_of_employees
+		   from Employee as emp
+		   inner join Department as dept on dept.Department_ID = emp.Department_Id
+		   group by dept.Name
+		   having count(dept.Name)>=5
+		   order by dept.Name asc
+		   
+
+/* 7. HOW MANY JOBS IN THE ORGANIZATION WITH DESIGNATIONS. */
+
+
+                
+            select count(jb.designation) as  num_of_jobs ,dept.name as organisation,jb.Designation 
+			from Employee as Emp
+			inner join  Department as dept on dept.Department_ID = Emp.Department_Id
+			inner join JOB as jb on jb.Job_ID = Emp.Job_Id
+			group by dept.name,jb.Designation
+			
+
+
+
+ /* 8. HOW MANY EMPLOYEES ARE WORKING IN "NEW YORK". */
+
+          
+		  select COUNT(emp.employee_id)as num_of_employees,loc.city
+		  from Employee as emp
+		  inner join  department as dept on  dept.Department_ID = emp.Department_Id
+		  inner join location as loc on loc.location_Id = dept.location_id
+		  where CITY = 'New york'
+		  group by loc.city
+
+                
+
+ /* 9. DISPLAY THE EMPLOYEE DETAILS WITH SALARY GRADES. */
+
+
+           SELECT EMP.Employee_ID,CONCAT(first_name,middle_name,last_name) AS Employee_name,
+		   EMP.SALARY,   try_cast(JB.Designation as int)
+		   FROM Employee AS EMP
+		   INNER JOIN Department AS DEPT ON DEPT.Department_ID = Emp.DEPARTMENT_ID
+		   INNER JOIN  JOB AS JB ON  JB.JOB_ID = EMP.JOB_ID
+		   ORDER BY Salary DESC 
+
+
+
+-- 10.LIST OUT THE NO. OF EMPLOYEES ON GRADE WISE.
+
+
+     
+    ;with SalaryGradetemp                 
+
+          as (
+			  select EMP.EMPLOYEE_ID,salary,
+			 
+    (Case 
+         When salary <=1000 Then '       0 -1000'
+         When salary >= 1001 and salary < 2000 Then '1001 -2000'
+		 when Salary  >= 2001 and Salary < 3000 then  '2001 -3000'
+         else
+             '4000'
+     end) as salary_Grade                                           
+      from Employee as emp
+	 
+        )         
+		      select salary_grade,COUNT(EMPLOYEE_ID) AS NUM_OF_EMPLOYEE
+			  from SalaryGradetemp
+			  GROUP BY salary_Grade
+			  ORDER BY  salary_Grade
+
+
+	  --ALTERNATIVE
+
+	 ;with salary_gradetemp1
+	  as (
+
+
+	  select EMP.Employee_Id, salary,
+	                 (case
+					          when salary <=1000 then ' Grade D'
+							  when salary >1000 AND SALARY <=2000  THEN 'Grade  C'
+			                  WHEN SALARY >2000  AND SALARY <=3000 THEN 'Grade B'
+							  ELSE  'Grade A'
+
+			         END) AS SALARY_GRADE
+					 FROM Employee AS EMP
+					 
+					
+
+			)		  
+
+					 
+					 select salary_grade,COUNT(Employee_Id) AS NUMBER_OF_EMPLOYEE
+					 from   salary_gradetemp1
+					 group by SALARY_GRADE
+					 order by SALARY_GRADE  desc
+
+		  
+			 
+
+/* 11.DISPLAY THE EMPLOYEE SALARY GRADES AND NO. OF EMPLOYEES BETWEEN 2000 TO 5000
+RANGE OF SALARY. */
+
+                        
+						
+     
+    ;with SalaryGradetemp2                 
+
+          as (
+			  select EMP.EMPLOYEE_ID,salary,
+			 
+    (Case 
+         When salary <=1000 Then '       0 -1000'
+         When salary >= 1001 and salary < 2000 Then '1001 -2000'
+		 when Salary  >= 2001 and Salary < 3000 then  '2001 -3000'
+         else
+             '4000'
+     end) as salary_Grade                                           
+      from Employee as emp
+	 
+        )         
+		      select salary_grade,COUNT(EMPLOYEE_ID) AS NUM_OF_EMPLOYEE
+			  from SalaryGradetemp2
+		      WHERE  salary BETWEEN 2000 AND 5000
+			  GROUP BY salary_Grade
+			  ORDER BY  salary_Grade
+
+
+
+
+-- 12.DISPLAY THE EMPLOYEE DETAILS WITH THEIR MANAGER NAMES.                            
+--13.DISPLAY THE EMPLOYEE DETAILS WHO EARN MORE THAN THEIR MANAGERS SALARIES.
+--14.SHOW THE NO. OF EMPLOYEES WORKING UNDER EVERY MANAGER.
+--15.DISPLAY EMPLOYEE DETAILS WITH THEIR MANAGER NAMES.
+
+
+16.DISPLAY ALL EMPLOYEES IN SALES OR OPERATION DEPARTMENTS.
+
+                     select CONCAT_WS(' ',first_name,middle_name,last_name) as Employee_fullName
+					  from Employee as emp
+					  inner join Department as dept on dept.Department_ID = emp.Department_Id
+					  where dept.Name = 'OPERATIONS' OR  dept.Name = 'SALES'
+
+
+-- SET OPERATORS
+
+-- 1. LIST OUT THE DISTINCT JOBS IN SALES AND ACCOUNTING DEPARTMENTS.
+          
+                  SELECT  DISTINCT DESIGNATION AS JOB
+                  FROM Employee AS EMP
+                  INNER JOIN JOB AS JB ON JB.Job_ID = EMP.Job_Id
+                  INNER JOIN Department AS DEPT ON DEPT.Department_ID =EMP.Department_Id
+                   --WHERE DEPT.NAME  = 'SALES' AND DEPT.Name = 'ACCOUNTING'
+                  WHERE DEPT.Name IN ('SALES','ACCOUNTING','OPERATIONS','RESEARCH')
+                  
+  
+
+
+-- 2.LIST OUT THE JOB IN SALES AND ACCOUNTING DEPARTMENTS
+
+
+
+                  SELECT Name AS DEPARTMENT_NAME,DESIGNATION AS JOB
+                  FROM Employee AS EMP
+                  INNER JOIN JOB AS JB ON JB.Job_ID = EMP.Job_Id
+                  INNER JOIN Department AS DEPT ON DEPT.Department_ID =EMP.Department_Id
+                  WHERE Name  IN ('SALES' ,'ACCOUNTING')
+                  
+
+ --  3. LIST OUT THE COMMON JOBS IN RESEARCH AND ACCOUNTING DEPARTMENTS IN ASCENDING ORDER.
+  
+
+                          SELECT DESIGNATION AS JOB
+                          FROM Employee AS EMP
+			              INNER JOIN JOB AS JB ON JB.Job_ID = EMP.Job_Id
+			              INNER JOIN Department AS DEPT ON DEPT.Department_ID = EMP.Department_Id
+			              WHERE Name IN ('RESEARCH','ACCOUNTING')
+			          	  ORDER BY Designation 
+			          
+			          
+
+
+-- SUB QUERIES 
+
+-- 1. DISPLAY THE EMPLOYEES LIST WHO GOT THE MAXIMUM SALARY.
+
+
+       SELECT Employee_Id,Salary FROM Employee
+       WHERE Salary = (SELECT MAX(SALARY) FROM Employee)  
+
+
+
+-- 2. DISPLAY THE EMPLOYEES WHO ARE WORKING IN SALES DEPARTMENT.
+
+
+        SELECT Employee_ID,CONCAT(' ',First_Name,Middle_Name,Last_Name) AS EMPLOYEE_NAME
+		FROM Employee AS EMP
+		WHERE EMP.Department_Id = ( SELECT  DEPT.Department_ID
+		FROM Department AS DEPT
+		WHERE Dept.name = 'SALES' )
+
+		-- BY USING JOINS
+
+        SELECT Employee_ID,CONCAT(' ',First_Name,Middle_Name,Last_Name) AS EMPLOYEE_NAME
+		FROM Employee AS EMP
+		INNER JOIN Department AS DEPT ON DEPT.Department_ID = EMP.Department_Id
+		WHERE DEPT.Name = 'SALES'
+
+
+
+-- 3. DISPLAY THE EMPLOYEES WHO ARE WORKING AS 'CLERK'.
+
+            
+
+        SELECT Employee_ID,CONCAT_WS(' ',First_Name,Middle_Name,Last_Name) AS EMPLOYEE_NAME
+		FROM Employee AS EMP
+		WHERE EMP.Job_Id = ( SELECT JB.Job_Id FROM JOB AS JB
+		WHERE JB.Designation =  'CLERK' )
+
+		-- BY USING JOINS
+		
+        SELECT Employee_ID,CONCAT_WS(' ',First_Name,Middle_Name,Last_Name) AS EMPLOYEE_NAME
+		FROM Employee AS EMP
+		INNER JOIN JOB AS JB ON JB.Job_ID = EMP.Job_Id
+		WHERE JB.Designation = 'CLERK'
+		 
+
+
+
+-- 4. DISPLAY THE LIST OF EMPLOYEES WHO ARE LIVING IN "NEW YORK".
+
+
+          
+        SELECT Employee_ID,CONCAT_WS(' ',First_Name,Middle_Name,Last_Name) AS EMPLOYEE_NAME
+		FROM Employee AS EMP
+        WHERE Department_Id = (SELECT DEPT.DEPARTMENT_ID  FROM Department  AS DEPT
+		                           WHERE DEPT.Location_ID = (SELECT LOC.Location_ID FROM location AS LOC
+								                                WHERE CITY = 'NEW YORK') )
+
+
+
+-- 5. FIND OUT NO. OF EMPLOYEES WORKING IN "SALES" DEPARTMENT.
+
+                  
+        SELECT COUNT(Employee_ID) AS NUM_OF_EMPLOYEES
+		FROM Employee AS EMP
+		WHERE Department_Id = (SELECT DEPT.DEPARTMENT_ID FROM Department AS DEPT
+		                             WHERE DEPT.Name = 'SALES')
+
+
+-- 6. UPDATE THE EMPLOYEES SALARIES, WHO ARE WORKING AS CLERK ON THE BASIS OF 10%.
+                 
+				 UPDATE Employee
+				 SET Salary =   SALARY +Salary *0.1
+				                  WHERE JOB_ID  = ( SELECT JOB_ID FROM JOB
+			
+
+		
+
+-- 7. DELETE THE EMPLOYEES WHO ARE WORKING IN ACCOUNTING DEPARTMENT.
+
+                   DELETE  from Employee
+				   WHERE Department_Id = ( SELECT  DEPT.Department_ID FROM  Department AS DEPT 
+				                               WHERE DEPT.NAME = 'ACCOUNTING' )
+
+											 
+-- 8. DISPLAY THE SECOND HIGHEST SALARY DRAWING EMPLOYEE DETAILS.
+
+            SELECT DISTINCT SALARY  AS SECOND_HIGHEST_SALARY FROM Employee AS EMP
+			WHERE Salary = (SELECT MAX(Salary) FROM Employee AS EMP 
+			                   WHERE Salary <  (SELECT MAX(SALARY) FROM Employee AS EMP  ) )
+
+							   
+-- 9. DISPLAY THE N'TH HIGHEST SALARY DRAWING EMPLOYEE DETAILS.
+
+                   SELECT DISTINCT SALARY FROM Employee AS Emp1
+				            WHERE (N-1) = ( SELECT COUNT(DISTINCT Salary)
+							                    FROM Employee  as EMP2
+												WHERE Emp1.Salary >= EMP2.Salary )
+
+          -- IN N Place we have keep any number to get the Nth highest salary
+
+            
+
+-- 10. LIST OUT THE EMPLOYEES WHO EARN MORE THAN EVERY EMPLOYEE IN DEPARTMENT 30.
+
+		                                	  
+                 SELECT Employee_ID
+                 FROM Employee
+                 WHERE Salary > (SELECT MAX(Salary) FROM Employee WHERE Department_ID = 30)
+                 
+-- 11. LIST OUT THE EMPLOYEES WHO EARN MORE THAN THE LOWEST SALARY IN DEPARTMENT 30.
+ 
+                 SELECT EMPLOYEE_ID,SALARY,DEPARTMENT_ID
+				 FROM EMPLOYEE
+				 WHERE SALARY > (SELECT MIN(SALARY) FROM EMPLOYEE WHERE DEPARTMENT_ID = 30 ) AND DEPARTMENT_ID <> 30
+			
+
+
+-- 12. FIND OUT WHICH DEPARTMENT DOES NOT HAVE ANY EMPLOYEES.
+
+                 
+				 SELECT DEPT.DEPARTMENT_ID FROM DEPARTMENT AS DEPT
+				                WHERE DEPT.DEPARTMENT_ID NOT IN ( SELECT DISTINCT DEPARTMENT_ID FROM EMPLOYEE AS EMP)
+								                   
+
+
+
+
+ /* 13. FIND OUT THE EMPLOYEES WHO EARN GREATER THAN THE AVERAGE SALARY FOR THEIR
+DEPARTMENT */
+
+                            
+               SELECT employee_id
+               FROM employee as emp
+               WHERE salary > ( SELECT AVG(salary) FROM employee AS avg_salaries
+			                           where department_id in (10,20,30,40) )
+                                    
+
+									
+
+							
+
