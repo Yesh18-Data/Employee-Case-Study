@@ -146,7 +146,7 @@ APRIL 1985.
 		   group by dept.Name
 		   having count(dept.Name)>=5
 		   order by dept.Name asc
-	```	   
+```	   
 
  9. HOW MANY EMPLOYEES ARE WORKING IN "NEW YORK".
   
